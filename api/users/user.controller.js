@@ -9,7 +9,7 @@ const {
 
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 
-const { sign } = require("jsonwebtoken");
+// const { sign } = require("jsonwebtoken");
 
 module.exports = {
   createUser: (req, res) => {
@@ -87,8 +87,9 @@ module.exports = {
 
   deleteUser: (req, res) => {
     const data = req.body;
-    // console.log(data);
+    console.log(data);
     deleteUser(data, (err, results) => {
+      console.log(results);
       if (err) {
         console.log(err);
         return;
@@ -127,13 +128,13 @@ module.exports = {
       console.log(result);
       if (result) {
         results.password = undefined;
-        const jsontoken = sign({ result: results }, "qwe1234", {
-          expiresIn: "1h",
-        });
+        // const jsontoken = sign({ result: results }, "qwe1234", {
+        //   expiresIn: "1h",
+        // });
         return res.json({
           success: 1,
           message: "login successfully",
-          token: jsontoken,
+          // token: jsontoken,
         });
       } else {
         return res.json({
